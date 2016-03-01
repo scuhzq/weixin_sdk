@@ -50,7 +50,7 @@ Maven
 	<dependency>
       <groupId>com.oldpeng.weixin</groupId>
       <artifactId>weixin_sdk</artifactId>
-      <version>1.0.6</version>
+      <version>1.0.7</version>
       <type>pom</type>
     </dependency>
 </settings>
@@ -64,5 +64,5 @@ repositories {
     }
 }
 
-compile 'com.oldpeng.weixin:weixin_sdk:1.0.6'
+compile 'com.oldpeng.weixin:weixin_sdk:1.0.7'
 ```
