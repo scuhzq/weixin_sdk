@@ -61,6 +61,42 @@ public class WeixinClientEngine {
 		return loginRedirectUri;
 	}
 
+	public void setToken(String token) {
+		this.token = token;
+	}
+
+	public void setEncodingAesKey(String encodingAesKey) {
+		this.encodingAesKey = encodingAesKey;
+	}
+
+	public void setAppId(String appId) {
+		this.appId = appId;
+	}
+
+	public void setAppSecret(String appSecret) {
+		this.appSecret = appSecret;
+	}
+
+	public void setLoginRedirectUri(String loginRedirectUri) {
+		this.loginRedirectUri = loginRedirectUri;
+	}
+
+	public String getAuthorizeRedirectUri() {
+		return authorizeRedirectUri;
+	}
+
+	public void setAuthorizeRedirectUri(String authorizeRedirectUri) {
+		this.authorizeRedirectUri = authorizeRedirectUri;
+	}
+
+	public String getHostAuthorizeRedirectUri() {
+		return hostAuthorizeRedirectUri;
+	}
+
+	public void setHostAuthorizeRedirectUri(String hostAuthorizeRedirectUri) {
+		this.hostAuthorizeRedirectUri = hostAuthorizeRedirectUri;
+	}
+
 	public String processPlainText(InputStream inputStream, String timestamp, String nonce, String msgSignature) {
 		try {
 			String fromXml = IOUtils.toString(inputStream, "UTF-8");
