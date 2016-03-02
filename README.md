@@ -25,6 +25,6 @@ Maven
 ```
 
 gradle
-```
+```gradle
 compile 'com.oldpeng.weixin:weixin_sdk:2.0.8'
 ```
