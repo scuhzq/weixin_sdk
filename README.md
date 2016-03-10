@@ -2,9 +2,14 @@
 # weixin sdk
 
 ```java
-//微信开放平台 / 微信公众平台
-WeixinClientEngine weixinClientEngine = new WeixinClientEngine();
-weixinClientEngine.setToken(...)
+//微信开放平台
+WeixinPlatformEngine weixinPlatformEngine = new WeixinPlatformEngine();
+weixinPlatformEngine.setToken(...)
+... ...
+
+//微信公众平台
+WeixinClientEngine WeixinClientEngine = new WeixinClientEngine();
+WeixinClientEngine.setAppid(...)
 ... ...
 
 //微信支付
