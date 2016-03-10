@@ -16,15 +16,32 @@ weixinPayEngine.setKey(...)
 
 Maven
 ```xml
-<dependency>
-  <groupId>com.oldpeng.weixin</groupId>
-  <artifactId>weixin_sdk</artifactId>
-  <version>2.0.8</version>
-  <type>pom</type>
-</dependency>
+<repositories>
+    <repository>
+        <snapshots>
+            <enabled>false</enabled>
+        </snapshots>
+        <id>bintray-usydapeng-maven</id>
+        <name>bintray</name>
+        <url>http://dl.bintray.com/usydapeng/maven</url>
+    </repository>
+</repositories>
+<dependencies>
+    <dependency>
+        <groupId>com.oldpeng.weixin</groupId>
+        <artifactId>weixin_sdk</artifactId>
+        <version>2.0.9</version>
+        <type>pom</type>
+    </dependency>
+</dependencies>
 ```
 
 gradle
 ```gradle
-compile 'com.oldpeng.weixin:weixin_sdk:2.0.8'
+repositories {
+    jcenter()
+}
+dependencies {
+    compile 'com.oldpeng.weixin:weixin_sdk:2.0.9'
+}
 ```

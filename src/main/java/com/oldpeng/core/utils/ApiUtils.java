@@ -28,7 +28,7 @@ public class ApiUtils {
 			int i = 0;
 			for(String key : keyList){
 				String value = requestParameters.get(key);
-				if(StringUtils.isBlank(value.toString())){
+				if(value == null || StringUtils.isBlank(value.toString())){
 					continue;
 				}
 				if(i > 0){

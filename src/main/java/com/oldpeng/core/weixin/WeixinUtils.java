@@ -58,6 +58,14 @@ public class WeixinUtils {
 
 	public static final String URL_CASH_GET_TRANSFER_INFO = "https://api.mch.weixin.qq.com/mmpaymkttransfers/gettransferinfo";
 
+	public static final String URL_USER_INFO_BATCHGET = "https://api.weixin.qq.com/cgi-bin/user/info/batchget";
+
+	public static final String URL_OPENID_BATCHGET = "https://api.weixin.qq.com/cgi-bin/user/get";
+
+	public static final String URL_LOGIN_AUTHORIZE = "https://open.weixin.qq.com/connect/qrconnect";
+
+	public static final String URL_LOGIN_ACCESS_TOKEN = "https://api.weixin.qq.com/sns/oauth2/access_token";
+
 	public static final String SCOPE_BASE = "snsapi_base";
 
 	public static final String SCOPE_USER_INFO = "snsapi_userinfo";

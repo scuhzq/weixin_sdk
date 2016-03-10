@@ -19,7 +19,7 @@ public class TemplateMessage implements Serializable {
 
 	private String url;
 
-	private Map<String, KeyValue> date = Maps.newHashMap();
+	private Map<String, KeyValue> data = Maps.newHashMap();
 
 	public String getToUser() {
 		return toUser;
@@ -45,12 +45,12 @@ public class TemplateMessage implements Serializable {
 		this.url = url;
 	}
 
-	public Map<String, KeyValue> getDate() {
-		return date;
+	public Map<String, KeyValue> getData() {
+		return data;
 	}
 
-	public void setDate(Map<String, KeyValue> date) {
-		this.date = date;
+	public void setData(Map<String, KeyValue> data) {
+		this.data = data;
 	}
 
 	public class KeyValue {

@@ -1,7 +1,5 @@
 package com.oldpeng.core.weixin;
 
-import com.alibaba.fastjson.JSONObject;
-import com.google.common.collect.Maps;
 import com.oldpeng.core.utils.ApiUtils;
 import com.oldpeng.core.utils.Md5Utils;
 import com.oldpeng.core.utils.Sha1Utils;
@@ -139,39 +137,6 @@ public class WeixinPayEngine {
 		PaymentOrderReturnBean paymentOrderReturnBean = new PaymentOrderReturnBean();
 		xStream.fromXML(returnXml, paymentOrderReturnBean);
 		return paymentOrderReturnBean;
-	}
-
-	public MpAccessToken getAccessToken(){
-		Map<String, String> requestParams = Maps.newHashMap();
-		requestParams.put("grant_type", "client_credential");
-		requestParams.put("appid", appid);
-		requestParams.put("secret", appSecret);
-
-		String result = WeixinUtils.post(WeixinUtils.URL_API_MP_ACCESS_TOKEN, requestParams, null);
-		logger.info("------- mp access token: " + result);
-		return JSONObject.parseObject(result, MpAccessToken.class);
-	}
-
-	public String buildAuthorizationUrl(String scope, String state) {
-		Map<String, String> requestParameters = Maps.newLinkedHashMap();
-		requestParameters.put("appid", appid);
-		requestParameters.put("redirect_uri", authorizeRedirectUri);
-		requestParameters.put("response_type", "code");
-		requestParameters.put("scope", scope);
-		requestParameters.put("state", state);
-		return WeixinUtils.buildUrl(WeixinUtils.URL_AUTHORIZE, requestParameters) + "#wechat_redirect";
-	}
-
-	public UserAccessToken getUserAccessToken(String code) {
-		Map<String, String> requestParams = Maps.newHashMap();
-		requestParams.put("appid", appid);
-		requestParams.put("secret", appSecret);
-		requestParams.put("code", code);
-		requestParams.put("grant_type", "authorization_code");
-
-		String result = WeixinUtils.post(WeixinUtils.URL_USER_ACCESS_TOKEN, requestParams, null);
-		logger.info("------- host user access token: " + result);
-		return JSONObject.parseObject(result, UserAccessToken.class);
 	}
 
 	public String getSign(Map<String, String> params, String key) {
