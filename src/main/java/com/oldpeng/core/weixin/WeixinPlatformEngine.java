@@ -228,16 +228,6 @@ public class WeixinPlatformEngine {
 		return JSONObject.parseObject(result, UserAccessToken.class);
 	}
 
-	public UserInfoBean getUserInfo(String accessToken, String openid) {
-		Map<String, String> requestParameters = Maps.newHashMap();
-		requestParameters.put("access_token", accessToken);
-		requestParameters.put("openid", openid);
-		requestParameters.put("lang", "zh_CN");
-		String result = WeixinUtils.post(WeixinUtils.URL_USER_INFO, requestParameters, null);
-		logger.info("------- user info: " + result);
-		return JSONObject.parseObject(result, UserInfoBean.class);
-	}
-
 	public InMessageBean getInMessageBean(String fromXml, String timestamp, String nonce, String msgSignature) throws Exception {
 		return XmlUtils.toBean(decryptMessage(fromXml, timestamp, nonce, msgSignature), InMessageBean.class);
 	}
@@ -258,21 +248,4 @@ public class WeixinPlatformEngine {
 		return xmlContent;
 	}
 
-	public String sendKefuTextMessage(String accessToken, String openId, String content){
-		Map<String, String> requestParameters = Maps.newHashMap();
-		requestParameters.put("access_token", accessToken);
-		Map<String, Object> requestBodyMap = Maps.newHashMap();
-		requestBodyMap.put("touser", openId);
-		requestBodyMap.put("msgtype", "text");
-		Map<String, String> contentMap = Maps.newHashMap();
-		contentMap.put("content", content);
-		requestBodyMap.put("text", contentMap);
-		return WeixinUtils.postObject(WeixinUtils.URL_SEND_KF_MESSAGE, requestParameters, requestBodyMap);
-	}
-
-	public String sendTemplateMessage(String accessToken, TemplateMessage templateMessage){
-		Map<String, String> requestParameters = Maps.newHashMap();
-		requestParameters.put("access_token", accessToken);
-		return WeixinUtils.postObject(WeixinUtils.URL_API_SEND_TEMPLATE_MESSAGE, requestParameters, templateMessage);
-	}
 }
