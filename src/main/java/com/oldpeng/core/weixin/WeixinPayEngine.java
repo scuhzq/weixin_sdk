@@ -1,8 +1,6 @@
 package com.oldpeng.core.weixin;
 
-import com.oldpeng.core.utils.ApiUtils;
-import com.oldpeng.core.utils.Md5Utils;
-import com.oldpeng.core.utils.Sha1Utils;
+import com.oldpeng.core.utils.WeixinApiUtils;
 import com.oldpeng.core.utils.XmlUtils;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.naming.NoNameCoder;
@@ -10,8 +8,6 @@ import com.thoughtworks.xstream.io.xml.StaxDriver;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.Map;
 
 /**
  * Created by dapeng on 16/1/19.
@@ -119,11 +115,11 @@ public class WeixinPayEngine {
 		if(certInfo == null){
 			paymentOrderBean.setAppid(appid);
 			paymentOrderBean.setMchid(appMchid);
-			paymentOrderBean.setSign(getSign(paymentOrderBean.retrieveStringProp(), this.key));
+			paymentOrderBean.setSign(WeixinApiUtils.getSign(paymentOrderBean.retrieveStringProp(), this.key));
 		} else {
 			paymentOrderBean.setAppid(certInfo.getAppId());
 			paymentOrderBean.setMchid(certInfo.getMchId());
-			paymentOrderBean.setSign(getSign(paymentOrderBean.retrieveStringProp(), certInfo.getKey()));
+			paymentOrderBean.setSign(WeixinApiUtils.getSign(paymentOrderBean.retrieveStringProp(), certInfo.getKey()));
 		}
 
 		String returnXml = WeixinUtils.postXML(WeixinUtils.URL_PAY_UNIFIEDORDER, paymentOrderBean);
@@ -139,28 +135,6 @@ public class WeixinPayEngine {
 		return paymentOrderReturnBean;
 	}
 
-	public String getSign(Map<String, String> params, String key) {
-		try {
-			String paramStr = ApiUtils.buildParamStr(params, false, true) + "&key=" + key;
-			logger.info("================= weixin callback pay sign: " + paramStr);
-			return Md5Utils.md5(paramStr).toUpperCase();
-		} catch(Throwable t){
-			logger.info(t.getMessage(), t);
-			return null;
-		}
-	}
-
-	public String getSignature(Map<String, String> params){
-		try {
-			String paramStr = ApiUtils.buildParamStr(params, false, true);
-			logger.info("------------------------------------weixin js signature: " + paramStr);
-			return Sha1Utils.encode(paramStr);
-		} catch(Throwable t){
-			logger.info(t.getMessage(), t);
-			return null;
-		}
-	}
-
 	/**
 	 * @param sendRedPackBean
 	 * @return
@@ -172,12 +146,12 @@ public class WeixinPayEngine {
 		if(certInfo == null){
 			sendRedPackBean.setWxappid(appid);
 			sendRedPackBean.setMchId(appMchid);
-			sendRedPackBean.setSign(getSign(sendRedPackBean.retrieveStringProp(), key));
+			sendRedPackBean.setSign(WeixinApiUtils.getSign(sendRedPackBean.retrieveStringProp(), key));
 			returnXml = WeixinUtils.postSslXML(this.certLocalPath, this.certPassword, WeixinUtils.URL_CASH_SEND_REDPACK, sendRedPackBean);
 		} else {
 			sendRedPackBean.setWxappid(certInfo.getAppId());
 			sendRedPackBean.setMchId(certInfo.getMchId());
-			sendRedPackBean.setSign(getSign(sendRedPackBean.retrieveStringProp(), certInfo.getKey()));
+			sendRedPackBean.setSign(WeixinApiUtils.getSign(sendRedPackBean.retrieveStringProp(), certInfo.getKey()));
 			returnXml = WeixinUtils.postSslXML(certInfo.getCertPath(), certInfo.getCertPassword(), WeixinUtils.URL_CASH_SEND_REDPACK, sendRedPackBean);
 		}
 
@@ -197,12 +171,12 @@ public class WeixinPayEngine {
 		if(certInfo == null){
 			getRedpackInfo.setAppid(appid);
 			getRedpackInfo.setMchId(appMchid);
-			getRedpackInfo.setSign(getSign(getRedpackInfo.retrieveStringProp(), this.key));
+			getRedpackInfo.setSign(WeixinApiUtils.getSign(getRedpackInfo.retrieveStringProp(), this.key));
 			returnXml = WeixinUtils.postSslXML(this.certLocalPath, this.certPassword, WeixinUtils.URL_CASH_GET_REDPACK_INFO, getRedpackInfo);
 		} else {
 			getRedpackInfo.setAppid(certInfo.getAppId());
 			getRedpackInfo.setMchId(certInfo.getMchId());
-			getRedpackInfo.setSign(getSign(getRedpackInfo.retrieveStringProp(), certInfo.getKey()));
+			getRedpackInfo.setSign(WeixinApiUtils.getSign(getRedpackInfo.retrieveStringProp(), certInfo.getKey()));
 			returnXml = WeixinUtils.postSslXML(certInfo.getCertPath(), certInfo.getCertPassword(), WeixinUtils.URL_CASH_GET_REDPACK_INFO, getRedpackInfo);
 		}
 
@@ -223,12 +197,12 @@ public class WeixinPayEngine {
 		if(certInfo == null){
 			transferBean.setAppid(appid);
 			transferBean.setMchid(appMchid);
-			transferBean.setSign(getSign(transferBean.retrieveStringProp(), this.key));
+			transferBean.setSign(WeixinApiUtils.getSign(transferBean.retrieveStringProp(), this.key));
 			returnXml = WeixinUtils.postSslXML(this.certLocalPath, this.certPassword, WeixinUtils.URL_CASH_TRANSFER, transferBean);
 		} else {
 			transferBean.setAppid(certInfo.getAppId());
 			transferBean.setMchid(certInfo.getMchId());
-			transferBean.setSign(getSign(transferBean.retrieveStringProp(), certInfo.getKey()));
+			transferBean.setSign(WeixinApiUtils.getSign(transferBean.retrieveStringProp(), certInfo.getKey()));
 			returnXml = WeixinUtils.postSslXML(certInfo.getCertPath(), certInfo.getCertPassword(), WeixinUtils.URL_CASH_TRANSFER, transferBean);
 		}
 
@@ -250,12 +224,12 @@ public class WeixinPayEngine {
 		if(certInfo == null){
 			getTransferInfo.setAppid(appid);
 			getTransferInfo.setMchid(appMchid);
-			getTransferInfo.setSign(getSign(getTransferInfo.retrieveStringProp(), this.key));
+			getTransferInfo.setSign(WeixinApiUtils.getSign(getTransferInfo.retrieveStringProp(), this.key));
 			returnXml = WeixinUtils.postSslXML(this.certLocalPath, this.certPassword, WeixinUtils.URL_CASH_GET_TRANSFER_INFO, getTransferInfo);
 		} else {
 			getTransferInfo.setAppid(certInfo.getAppId());
 			getTransferInfo.setMchid(certInfo.getMchId());
-			getTransferInfo.setSign(getSign(getTransferInfo.retrieveStringProp(), certInfo.getKey()));
+			getTransferInfo.setSign(WeixinApiUtils.getSign(getTransferInfo.retrieveStringProp(), certInfo.getKey()));
 			returnXml = WeixinUtils.postSslXML(certInfo.getCertPath(), certInfo.getCertPassword(), WeixinUtils.URL_CASH_GET_TRANSFER_INFO, getTransferInfo);
 		}
 
