@@ -55,6 +55,15 @@ public class WeixinClientEngine {
 		return JSONObject.parseObject(result, MpAccessToken.class);
 	}
 
+	public MpJsapiTicket getMpJsApiTicket(String accessToken){
+		Map<String, String> requestParams = Maps.newHashMap();
+		requestParams.put("access_token", accessToken);
+		requestParams.put("type", "jsapi");
+		String result = WeixinUtils.post(WeixinUtils.URL_API_MP_TICKET, requestParams, null);
+		logger.info("------- mp ticket: " + result);
+		return JSONObject.parseObject(result, MpJsapiTicket.class);
+	}
+
 	public String buildAuthorizationUrl(String scope, String state) {
 		Map<String, String> requestParameters = Maps.newLinkedHashMap();
 		requestParameters.put("appid", appid);

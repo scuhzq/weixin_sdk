@@ -187,15 +187,6 @@ public class WeixinPlatformEngine {
 		return JSONObject.parseObject(result, AuthorizerTokenInfo.class);
 	}
 
-	public MpJsapiTicket getMpJsApiTicket(String accessToken){
-		Map<String, String> requestParams = Maps.newHashMap();
-		requestParams.put("access_token", accessToken);
-		requestParams.put("type", "jsapi");
-		String result = WeixinUtils.post(WeixinUtils.URL_API_MP_TICKET, requestParams, null);
-		logger.info("------- mp ticket: " + result);
-		return JSONObject.parseObject(result, MpJsapiTicket.class);
-	}
-
 	public String buildAuthorizationUrl(String authorizerAppId, String scope, String state) {
 		return buildAuthUrl(authorizerAppId, scope, state, authorizeRedirectUri);
 	}
