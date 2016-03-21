@@ -74,14 +74,15 @@ public class WeixinClientEngine {
 		return WeixinUtils.buildUrl(WeixinUtils.URL_AUTHORIZE, requestParameters) + "#wechat_redirect";
 	}
 
-	public UserAccessToken getUserAccessToken(String code) {
+	public UserAccessToken getWebpageUserAccessToken(String code){
+		//https://api.weixin.qq.com/sns/oauth2/access_token?appid=APPID&secret=SECRET&code=CODE&grant_type=authorization_code
 		Map<String, String> requestParams = Maps.newHashMap();
 		requestParams.put("appid", appid);
 		requestParams.put("secret", appSecret);
 		requestParams.put("code", code);
 		requestParams.put("grant_type", "authorization_code");
 
-		String result = WeixinUtils.post(WeixinUtils.URL_USER_ACCESS_TOKEN, requestParams, null);
+		String result = WeixinUtils.post(WeixinUtils.URL_WEB_PAGE_USER_ACCESS_TOKEN, requestParams, null);
 		logger.info("------- host user access token: " + result);
 		return JSONObject.parseObject(result, UserAccessToken.class);
 	}
