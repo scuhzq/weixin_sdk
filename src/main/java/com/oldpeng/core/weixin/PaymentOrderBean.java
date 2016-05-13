@@ -2,6 +2,7 @@ package com.oldpeng.core.weixin;
 
 import com.oldpeng.core.utils.UuidUtils;
 import com.oldpeng.core.weixin.annotation.FieldExclude;
+import com.oldpeng.core.xstream.XStreamCDATA;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +13,7 @@ import java.io.Serializable;
  * Created by dapeng on 16/1/19.
  */
 @XStreamAlias("xml")
+@XStreamCDATA
 public class PaymentOrderBean extends Bean2Map implements Serializable {
 
 	private static final long serialVersionUID = -154950571736208129L;

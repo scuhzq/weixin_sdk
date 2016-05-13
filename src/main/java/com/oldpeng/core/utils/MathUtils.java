@@ -9,9 +9,9 @@ import java.math.BigDecimal;
  */
 public class MathUtils {
 
-	public static <T> T multiply(double price, int multiples, Class<T> clazz){
-		BigDecimal bd1 = new BigDecimal(Double.toString(price));
-		BigDecimal bd2 = new BigDecimal(Double.toString(multiples));
+	public static <T> T multiply(Number number, Number multiples, Class<T> clazz){
+		BigDecimal bd1 = new BigDecimal(number.toString());
+		BigDecimal bd2 = new BigDecimal(multiples.toString());
 		try {
 			return convert2Number(bd1.multiply(bd2), clazz);
 		} catch (Throwable t) {
@@ -47,6 +47,14 @@ public class MathUtils {
 		} catch (Throwable t) {
 			throw new RuntimeException(t.getMessage(), t);
 		}
+	}
+
+	public static long convert2Cent(double price){
+		return multiply(price, 100, Long.class);
+	}
+
+	public static double convert2Dollar(long price){
+		return divide(price, 100, Double.class);
 	}
 
 	private static  <T> T convert2Number(BigDecimal bigDecimal, Class<T> clazz) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {

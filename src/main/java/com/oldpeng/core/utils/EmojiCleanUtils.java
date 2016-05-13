@@ -19,9 +19,9 @@ public class EmojiCleanUtils {
 		Pattern emoji = Pattern.compile("[\ud83c\udc00-\ud83c\udfff]|[\ud83d\udc00-\ud83d\udfff]|[\u2600-\u27ff]",
 							Pattern.UNICODE_CASE | Pattern.CASE_INSENSITIVE );
 		try {
-			Matcher emojiMatcher = emoji.matcher(result);
+			Matcher emojiMatcher = emoji.matcher(content);
 			while(emojiMatcher.find()){
-				result = content.replace(emojiMatcher.group(), "");
+				result = result.replace(emojiMatcher.group(), "");
 			}
 		} catch (Throwable t) {
 			logger.info(t.getMessage(), t);
