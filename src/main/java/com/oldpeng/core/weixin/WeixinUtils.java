@@ -68,6 +68,8 @@ public class WeixinUtils {
 
 	public static final String URL_WEB_PAGE_USER_ACCESS_TOKEN = "https://api.weixin.qq.com/sns/oauth2/access_token";
 
+	public static final String URL_SHORTURL = "https://api.weixin.qq.com/cgi-bin/shorturl";
+
 	public static final String SCOPE_BASE = "snsapi_base";
 
 	public static final String SCOPE_USER_INFO = "snsapi_userinfo";
