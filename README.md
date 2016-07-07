@@ -50,3 +50,9 @@ dependencies {
     compile 'com.oldpeng.weixin:weixin_sdk:2.1.9'
 }
 ```
+
+
+
+>微信支付、微信网页授权demo
+
+>[https://github.com/usydapeng/weixin_sdk_demo](https://github.com/usydapeng/weixin_sdk_demo)
