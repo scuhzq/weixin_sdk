@@ -42,6 +42,20 @@ public class InMessageBean implements Serializable {
 	@XStreamAlias("Precision")
 	private String precision;
 
+	@XStreamAlias("MediaId")
+	private String mediaId;
+
+	@XStreamAlias("PicUrl")
+	private String picUrl;
+
+	@XStreamAlias("EventKey")
+	private String eventKey;
+
+	@XStreamAlias("Ticket")
+	private String ticket;
+
+
+
 	public String getToUserName() {
 		return toUserName;
 	}
@@ -120,5 +134,37 @@ public class InMessageBean implements Serializable {
 
 	public void setPrecision(String precision) {
 		this.precision = precision;
+	}
+
+	public String getMediaId() {
+		return mediaId;
+	}
+
+	public void setMediaId(String mediaId) {
+		this.mediaId = mediaId;
+	}
+
+	public String getPicUrl() {
+		return picUrl;
+	}
+
+	public void setPicUrl(String picUrl) {
+		this.picUrl = picUrl;
+	}
+
+	public String getEventKey() {
+		return eventKey;
+	}
+
+	public void setEventKey(String eventKey) {
+		this.eventKey = eventKey;
+	}
+
+	public String getTicket() {
+		return ticket;
+	}
+
+	public void setTicket(String ticket) {
+		this.ticket = ticket;
 	}
 }
