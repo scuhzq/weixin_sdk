@@ -8,7 +8,7 @@ weixinPlatformEngine.setToken(...)
 ... ...
 
 //微信公众平台
-WeixinClientEngine WeixinClientEngine = new WeixinClientEngine();
+WeixinClientEngine weixinClientEngine = new WeixinClientEngine();
 WeixinClientEngine.setAppid(...)
 ... ...
 
@@ -35,7 +35,7 @@ Maven
     <dependency>
         <groupId>com.oldpeng.weixin</groupId>
         <artifactId>weixin_sdk</artifactId>
-        <version>2.1.6</version>
+        <version>2.1.7</version>
         <type>pom</type>
     </dependency>
 </dependencies>
@@ -47,6 +47,6 @@ repositories {
     jcenter()
 }
 dependencies {
-    compile 'com.oldpeng.weixin:weixin_sdk:2.1.6'
+    compile 'com.oldpeng.weixin:weixin_sdk:2.1.7'
 }
 ```
