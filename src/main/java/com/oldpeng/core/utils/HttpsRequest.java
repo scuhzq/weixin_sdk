@@ -121,16 +121,16 @@ public class HttpsRequest {
             result = EntityUtils.toString(entity, "UTF-8");
 
         } catch (ConnectionPoolTimeoutException e) {
-        	logger.info("http get throw ConnectionPoolTimeoutException(wait time out)");
+        	logger.error("http get throw ConnectionPoolTimeoutException(wait time out)");
 
         } catch (ConnectTimeoutException e) {
-        	logger.info("http get throw ConnectTimeoutException");
+        	logger.error("http get throw ConnectTimeoutException");
 
         } catch (SocketTimeoutException e) {
-        	logger.info("http get throw SocketTimeoutException");
+        	logger.error("http get throw SocketTimeoutException");
 
         } catch (Exception e) {
-        	logger.info("http get throw Exception");
+        	logger.error("http get throw Exception");
 
         } finally {
             httpPost.abort();

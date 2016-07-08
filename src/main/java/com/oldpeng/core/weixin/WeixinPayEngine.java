@@ -124,7 +124,7 @@ public class WeixinPayEngine {
 
 		String returnXml = WeixinUtils.postXML(WeixinUtils.URL_PAY_UNIFIEDORDER, paymentOrderBean);
 
-		logger.info("------ unified order : " + returnXml);
+		logger.debug("------ unified order : " + returnXml);
 
 		XStream xStream = new XStream(new StaxDriver(new NoNameCoder()));
 		xStream.autodetectAnnotations(true);
@@ -155,7 +155,7 @@ public class WeixinPayEngine {
 			returnXml = WeixinUtils.postSslXML(certInfo.getCertPath(), certInfo.getCertPassword(), WeixinUtils.URL_CASH_SEND_REDPACK, sendRedPackBean);
 		}
 
-		logger.info("----------- send redpack: " + returnXml);
+		logger.debug("----------- send redpack: " + returnXml);
 
 		return XmlUtils.toBean(returnXml, SendRedPackReturnBean.class);
 	}
@@ -180,7 +180,7 @@ public class WeixinPayEngine {
 			returnXml = WeixinUtils.postSslXML(certInfo.getCertPath(), certInfo.getCertPassword(), WeixinUtils.URL_CASH_GET_REDPACK_INFO, getRedpackInfo);
 		}
 
-		logger.info("----------- get redpack info: " + returnXml);
+		logger.debug("----------- get redpack info: " + returnXml);
 
 		return XmlUtils.toBean(returnXml, GetRedpackReturnInfo.class);
 	}
@@ -206,7 +206,7 @@ public class WeixinPayEngine {
 			returnXml = WeixinUtils.postSslXML(certInfo.getCertPath(), certInfo.getCertPassword(), WeixinUtils.URL_CASH_TRANSFER, transferBean);
 		}
 
-		logger.info("---------------- pay to user transfer: " + returnXml);
+		logger.debug("---------------- pay to user transfer: " + returnXml);
 
 		return XmlUtils.toBean(returnXml, TransferReturnBean.class);
 	}
@@ -233,7 +233,7 @@ public class WeixinPayEngine {
 			returnXml = WeixinUtils.postSslXML(certInfo.getCertPath(), certInfo.getCertPassword(), WeixinUtils.URL_CASH_GET_TRANSFER_INFO, getTransferInfo);
 		}
 
-		logger.info("--------------- get pay result transfer: " + returnXml);
+		logger.debug("--------------- get pay result transfer: " + returnXml);
 
 		return XmlUtils.toBean(returnXml, GetTransferReturnInfo.class);
 	}

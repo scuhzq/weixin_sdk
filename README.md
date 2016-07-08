@@ -35,7 +35,7 @@ Maven
     <dependency>
         <groupId>com.oldpeng.weixin</groupId>
         <artifactId>weixin_sdk</artifactId>
-        <version>2.1.9</version>
+        <version>2.2.0</version>
         <type>pom</type>
     </dependency>
 </dependencies>
@@ -47,7 +47,7 @@ repositories {
     jcenter()
 }
 dependencies {
-    compile 'com.oldpeng.weixin:weixin_sdk:2.1.9'
+    compile 'com.oldpeng.weixin:weixin_sdk:2.2.0'
 }
 ```
 

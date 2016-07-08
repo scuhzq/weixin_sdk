@@ -48,7 +48,7 @@ public class Bean2Map {
 			}
 			return map;
 		} catch(Throwable t){
-			logger.info(t.getMessage(), t);
+			logger.error(t.getMessage(), t);
 			throw new RuntimeException(t.getMessage(), t);
 		}
 	}

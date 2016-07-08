@@ -42,7 +42,7 @@ public class CustomTrustOkHttpClient {
 
 			return sslContext;
 		} catch (Exception e) {
-			logger.info(e.getMessage(), e);
+			logger.error(e.getMessage(), e);
 			throw new RuntimeException(e);
 		}
 	}

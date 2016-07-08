@@ -94,10 +94,10 @@ public class WeixinUtils {
 		try {
 			String httpUrl = buildUrl(baseUrl, requestParameters);
 
-			logger.info("");
-			logger.info("okhttp url: " + httpUrl);
-			logger.info("okhttp body: " + requestBodyJson);
-			logger.info("");
+			logger.debug(">>>");
+			logger.debug("okhttp url: " + httpUrl);
+			logger.debug("okhttp body: " + requestBodyJson);
+			logger.debug("<<<");
 
 			Request request = new Request.Builder()
 					.url(httpUrl)
@@ -111,7 +111,7 @@ public class WeixinUtils {
 
 			return response.body().string();
 		} catch(Throwable t){
-			logger.info(t.getMessage(), t);
+			logger.error(t.getMessage(), t);
 			return null;
 		}
 	}
@@ -125,7 +125,7 @@ public class WeixinUtils {
 			}
 			return httpUrl;
 		} catch(Throwable t){
-			logger.info(t.getMessage(), t);
+			logger.error(t.getMessage(), t);
 			return null;
 		}
 	}
@@ -134,10 +134,10 @@ public class WeixinUtils {
 		try {
 			String contentXml = XmlUtils.toXml(content);
 
-			logger.info("");
-			logger.info("okhttp xml url: " + baseUrl);
-			logger.info("okhttp xml body: " + contentXml);
-			logger.info("");
+			logger.debug(">>>");
+			logger.debug("okhttp xml url: " + baseUrl);
+			logger.debug("okhttp xml body: " + contentXml);
+			logger.debug("<<<");
 
 			Request request = new Request.Builder()
 					.url(baseUrl)
@@ -151,7 +151,7 @@ public class WeixinUtils {
 
 			return response.body().string();
 		} catch(Throwable t){
-			logger.info(t.getMessage(), t);
+			logger.error(t.getMessage(), t);
 			return null;
 		}
 	}
@@ -160,14 +160,14 @@ public class WeixinUtils {
 		try {
 			String contentXml = XmlUtils.toXml(content);
 
-			logger.info("");
-			logger.info("okhttp xml url: " + baseUrl);
-			logger.info("okhttp xml body: " + contentXml);
-			logger.info("");
+			logger.debug(">>>");
+			logger.debug("okhttp xml url: " + baseUrl);
+			logger.debug("okhttp xml body: " + contentXml);
+			logger.debug("<<<");
 
 			return new HttpsRequest(certLocalPath, certPassword).sendPost(baseUrl, contentXml);
 		} catch(Throwable t){
-			logger.info(t.getMessage(), t);
+			logger.error(t.getMessage(), t);
 			return null;
 		}
 	}

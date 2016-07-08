@@ -26,7 +26,7 @@ public class XmlUtils {
 			Document document = DocumentHelper.parseText(contentXML);
 			return document.getRootElement().asXML();
 		} catch(Throwable t){
-			logger.info(t.getMessage(), t);
+			logger.error(t.getMessage(), t);
 			return null;
 		}
 	}
@@ -41,7 +41,7 @@ public class XmlUtils {
 			xStream.fromXML(fromXml, instance);
 			return (T) instance;
 		} catch(Throwable t){
-			logger.info(t.getMessage(), t);
+			logger.error(t.getMessage(), t);
 			return null;
 		}
 	}

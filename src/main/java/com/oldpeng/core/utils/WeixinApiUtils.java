@@ -15,10 +15,10 @@ public class WeixinApiUtils {
 	public static String getSign(Map<String, String> params, String key) {
 		try {
 			String paramStr = ApiUtils.buildParamStr(params, false, true) + "&key=" + key;
-			logger.info("================= weixin callback pay sign: " + paramStr);
+			logger.debug("================= weixin callback pay sign: " + paramStr);
 			return Md5Utils.md5(paramStr).toUpperCase();
 		} catch(Throwable t){
-			logger.info(t.getMessage(), t);
+			logger.error(t.getMessage(), t);
 			return null;
 		}
 	}
@@ -26,10 +26,10 @@ public class WeixinApiUtils {
 	public static String getSignature(Map<String, String> params){
 		try {
 			String paramStr = ApiUtils.buildParamStr(params, false, true);
-			logger.info("------------------------------------weixin js signature: " + paramStr);
+			logger.debug("------------------------------------weixin js signature: " + paramStr);
 			return Sha1Utils.encode(paramStr);
 		} catch(Throwable t){
-			logger.info(t.getMessage(), t);
+			logger.error(t.getMessage(), t);
 			return null;
 		}
 	}

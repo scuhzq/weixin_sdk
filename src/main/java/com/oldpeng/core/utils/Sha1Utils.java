@@ -24,7 +24,7 @@ public class Sha1Utils {
 
 			return sb.toString();
 		} catch (Throwable t){
-			logger.info(t.getMessage(), t);
+			logger.error(t.getMessage(), t);
 			return null;
 		}
 	}
@@ -47,7 +47,7 @@ public class Sha1Utils {
 			}
 			return hexstr.toString();
 		} catch(Throwable t){
-			logger.info(t.getMessage(), t);
+			logger.error(t.getMessage(), t);
 			return null;
 		}
 	}

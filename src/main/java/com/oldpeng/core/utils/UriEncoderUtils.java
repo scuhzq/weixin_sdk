@@ -16,7 +16,7 @@ public class UriEncoderUtils {
 		try {
 			return URLEncoder.encode(uri, "UTF-8");
 		} catch(Throwable t){
-			logger.info(t.getMessage(), t);
+			logger.error(t.getMessage(), t);
 			return null;
 		}
 	}

@@ -54,7 +54,8 @@ public class InMessageBean implements Serializable {
 	@XStreamAlias("Ticket")
 	private String ticket;
 
-
+	@XStreamAlias("Format")
+	private String format;
 
 	public String getToUserName() {
 		return toUserName;
@@ -166,5 +167,13 @@ public class InMessageBean implements Serializable {
 
 	public void setTicket(String ticket) {
 		this.ticket = ticket;
+	}
+
+	public String getFormat() {
+		return format;
+	}
+
+	public void setFormat(String format) {
+		this.format = format;
 	}
 }

@@ -75,7 +75,7 @@ public class WeixinClientEngine {
 		requestParams.put("secret", appSecret);
 
 		String result = WeixinUtils.post(WeixinUtils.URL_API_MP_ACCESS_TOKEN, requestParams, null);
-		logger.info("------- mp access token: " + result);
+		logger.debug("------- mp access token: " + result);
 		return JSONObject.parseObject(result, MpAccessToken.class);
 	}
 
@@ -84,7 +84,7 @@ public class WeixinClientEngine {
 		requestParams.put("access_token", accessToken);
 		requestParams.put("type", "jsapi");
 		String result = WeixinUtils.post(WeixinUtils.URL_API_MP_TICKET, requestParams, null);
-		logger.info("------- mp ticket: " + result);
+		logger.debug("------- mp ticket: " + result);
 		return JSONObject.parseObject(result, MpJsapiTicket.class);
 	}
 
@@ -107,7 +107,7 @@ public class WeixinClientEngine {
 		requestParams.put("grant_type", "authorization_code");
 
 		String result = WeixinUtils.post(WeixinUtils.URL_WEB_PAGE_USER_ACCESS_TOKEN, requestParams, null);
-		logger.info("------- host user access token: " + result);
+		logger.debug("------- host user access token: " + result);
 		return JSONObject.parseObject(result, UserAccessToken.class);
 	}
 
@@ -117,7 +117,7 @@ public class WeixinClientEngine {
 		requestParameters.put("openid", openid);
 		requestParameters.put("lang", "zh_CN");
 		String result = WeixinUtils.post(WeixinUtils.URL_USER_INFO, requestParameters, null);
-		logger.info("------- user info: " + result);
+		logger.debug("------- user info: " + result);
 		return JSONObject.parseObject(result, UserInfoBean.class);
 	}
 
@@ -143,7 +143,7 @@ public class WeixinClientEngine {
 		Map<String, String> requestParameters = Maps.newHashMap();
 		requestParameters.put("access_token", accessToken);
 		String result = WeixinUtils.postObject(WeixinUtils.URL_USER_INFO_BATCHGET, requestParameters, openidListBatchGetBean);
-		logger.info("------- user info batchget: " + result);
+		logger.debug("------- user info batchget: " + result);
 		return JSONObject.parseObject(result, UserInfoListBean.class);
 	}
 
@@ -152,7 +152,7 @@ public class WeixinClientEngine {
 		requestParameters.put("access_token", accessToken);
 		requestParameters.put("next_openid", nextOpenid);
 		String result = WeixinUtils.postObject(WeixinUtils.URL_OPENID_BATCHGET, requestParameters, null);
-		logger.info("----------- openid list batch: " + result);
+		logger.debug("----------- openid list batch: " + result);
 		return JSONObject.parseObject(result, OpenidListBean.class);
 	}
 
@@ -161,22 +161,22 @@ public class WeixinClientEngine {
 			String fromXml = IOUtils.toString(inputStream, "UTF-8");
 			return processPlainTextFromXml(fromXml, timestamp, nonce, msgSignature);
 		} catch(Throwable t){
-			logger.info(t.getMessage(), t);
+			logger.error(t.getMessage(), t);
 			return "error";
 		}
 	}
 
 	public String processPlainTextFromXml(String fromXml, String timestamp, String nonce, String msgSignature) {
 		try {
-			logger.info("加密数据: " + fromXml);
-			logger.info("token: " + token + "\tencodingAesKey: " + encodingAesKey + "\tappId: " + appid);
-			logger.info("msgSignature: " + msgSignature + "\ttimestamp: " + timestamp + "\tnonce: " + nonce);
+			logger.debug("加密数据: " + fromXml);
+			logger.debug("token: " + token + "\tencodingAesKey: " + encodingAesKey + "\tappId: " + appid);
+			logger.debug("msgSignature: " + msgSignature + "\ttimestamp: " + timestamp + "\tnonce: " + nonce);
 			WXBizMsgCrypt wxBizMsgCrypt = new WXBizMsgCrypt(token, encodingAesKey, appid);
 			String plainText = wxBizMsgCrypt.decryptMsg(msgSignature, timestamp, nonce, fromXml);
-			logger.info("解密后明文: " + plainText);
+			logger.debug("解密后明文: " + plainText);
 			return plainText;
 		} catch(Throwable t){
-			logger.info(t.getMessage(), t);
+			logger.error(t.getMessage(), t);
 			return "error";
 		}
 	}
@@ -186,18 +186,18 @@ public class WeixinClientEngine {
 	}
 
 	public String decryptMessage(String fromXml, String timestamp, String nonce, String msgSignature) throws Exception {
-		logger.info("====== weixin receive message 加密: " + fromXml);
+		logger.debug("====== weixin receive message 加密: " + fromXml);
 		WXBizMsgCrypt wxBizMsgCrypt = new WXBizMsgCrypt(token, encodingAesKey, appid);
 		String xmlContent = wxBizMsgCrypt.decryptMsg(msgSignature, timestamp, nonce, fromXml);
-		logger.info("====== weixin receive message 解密: " + xmlContent);
+		logger.debug("====== weixin receive message 解密: " + xmlContent);
 		return xmlContent;
 	}
 
 	public String encodeReplyMessage(String fromXml, String timestamp, String nonce) throws Exception {
-		logger.info("====== weixin reply message 解密: " + fromXml);
+		logger.debug("====== weixin reply message 解密: " + fromXml);
 		WXBizMsgCrypt wxBizMsgCrypt = new WXBizMsgCrypt(token, encodingAesKey, appid);
 		String xmlContent = wxBizMsgCrypt.encryptMsg(fromXml, timestamp, nonce);
-		logger.info("====== weixin reply message 加密: " + xmlContent);
+		logger.debug("====== weixin reply message 加密: " + xmlContent);
 		return xmlContent;
 	}
 }

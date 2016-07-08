@@ -24,7 +24,7 @@ public class EmojiCleanUtils {
 				result = result.replace(emojiMatcher.group(), "");
 			}
 		} catch (Throwable t) {
-			logger.info(t.getMessage(), t);
+			logger.error(t.getMessage(), t);
 			result = null;
 		}
 
