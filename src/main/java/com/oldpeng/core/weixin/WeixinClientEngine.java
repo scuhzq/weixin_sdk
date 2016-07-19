@@ -111,13 +111,13 @@ public class WeixinClientEngine {
 		return JSONObject.parseObject(result, UserAccessToken.class);
 	}
 
-	public UserInfoBean getUserInfo(String accessToken, String openid) {
+	public UserInfoBean getUserInfoByWebAuth(String accessToken, String openid) {
 		Map<String, String> requestParameters = Maps.newHashMap();
 		requestParameters.put("access_token", accessToken);
 		requestParameters.put("openid", openid);
 		requestParameters.put("lang", "zh_CN");
-		String result = WeixinUtils.post(WeixinUtils.URL_USER_INFO, requestParameters, null);
-		logger.debug("------- user info: " + result);
+		String result = WeixinUtils.post(WeixinUtils.URL_USER_INFO_BY_WEB_AUTH, requestParameters, null);
+		logger.debug("------- web auth user info: " + result);
 		return JSONObject.parseObject(result, UserInfoBean.class);
 	}
 
@@ -145,6 +145,16 @@ public class WeixinClientEngine {
 		String result = WeixinUtils.postObject(WeixinUtils.URL_USER_INFO_BATCHGET, requestParameters, openidListBatchGetBean);
 		logger.debug("------- user info batchget: " + result);
 		return JSONObject.parseObject(result, UserInfoListBean.class);
+	}
+
+	public UserInfoBean getUserInfo(String accessToken, String openid){
+		Map<String, String> requestParameters = Maps.newHashMap();
+		requestParameters.put("access_token", accessToken);
+		requestParameters.put("openid", openid);
+		requestParameters.put("lang", "zh_CN");
+		String result = WeixinUtils.postObject(WeixinUtils.URL_USER_INFO, requestParameters, null);
+		logger.debug("------- user info get: " + result);
+		return JSONObject.parseObject(result, UserInfoBean.class);
 	}
 
 	public OpenidListBean batchGetOpenidList(String accessToken, String nextOpenid){

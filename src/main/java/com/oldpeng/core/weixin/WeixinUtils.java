@@ -36,7 +36,7 @@ public class WeixinUtils {
 
 	public static final String URL_USER_ACCESS_TOKEN = "https://api.weixin.qq.com/sns/oauth2/component/access_token";
 
-	public static final String URL_USER_INFO = "https://api.weixin.qq.com/sns/userinfo";
+	public static final String URL_USER_INFO_BY_WEB_AUTH = "https://api.weixin.qq.com/sns/userinfo";
 
 	public static final String URL_PAY_UNIFIEDORDER = "https://api.mch.weixin.qq.com/pay/unifiedorder";
 
@@ -59,6 +59,8 @@ public class WeixinUtils {
 	public static final String URL_CASH_GET_TRANSFER_INFO = "https://api.mch.weixin.qq.com/mmpaymkttransfers/gettransferinfo";
 
 	public static final String URL_USER_INFO_BATCHGET = "https://api.weixin.qq.com/cgi-bin/user/info/batchget";
+
+	public static final String URL_USER_INFO = "https://api.weixin.qq.com/cgi-bin/user/info";
 
 	public static final String URL_OPENID_BATCHGET = "https://api.weixin.qq.com/cgi-bin/user/get";
 
