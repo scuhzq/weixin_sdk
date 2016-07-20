@@ -3,6 +3,7 @@ package com.oldpeng.core.weixin;
 import com.alibaba.fastjson.annotation.JSONField;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by dapeng on 16/1/15.
@@ -32,6 +33,16 @@ public class UserInfoBean implements Serializable {
 
 	@JSONField(name = "subscribe_time")
 	private long subscribeTimes;
+
+	private String unionid;
+
+	private int subscribe;
+
+	@JSONField(name = "groupid")
+	private int groupId;
+
+	@JSONField(name = "tagid_list")
+	private List<Long> tagIdList;
 
 	public String getHeadImgUrl() {
 		return headImgUrl;
@@ -111,5 +122,37 @@ public class UserInfoBean implements Serializable {
 
 	public void setSubscribeTimes(long subscribeTimes) {
 		this.subscribeTimes = subscribeTimes;
+	}
+
+	public String getUnionid() {
+		return unionid;
+	}
+
+	public void setUnionid(String unionid) {
+		this.unionid = unionid;
+	}
+
+	public int getSubscribe() {
+		return subscribe;
+	}
+
+	public void setSubscribe(int subscribe) {
+		this.subscribe = subscribe;
+	}
+
+	public int getGroupId() {
+		return groupId;
+	}
+
+	public void setGroupId(int groupId) {
+		this.groupId = groupId;
+	}
+
+	public List<Long> getTagIdList() {
+		return tagIdList;
+	}
+
+	public void setTagIdList(List<Long> tagIdList) {
+		this.tagIdList = tagIdList;
 	}
 }
