@@ -66,6 +66,12 @@ public class TemplateMessage implements Serializable {
 			this.value = value;
 		}
 
+
+		public KeyValue(String value, String color){
+			this.value = value;
+			this.color = color;
+		}
+
 		public String getColor() {
 			return color;
 		}

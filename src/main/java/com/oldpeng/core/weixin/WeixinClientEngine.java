@@ -166,6 +166,17 @@ public class WeixinClientEngine {
 		return JSONObject.parseObject(result, OpenidListBean.class);
 	}
 
+	public ShortUrlReturnBean generateShorturl(String accessToken, String longUrl){
+		Map<String, String> requestParameters = Maps.newHashMap();
+		requestParameters.put("access_token", accessToken);
+		Map<String, Object> requestBodyMap = Maps.newHashMap();
+		requestBodyMap.put("long_url", longUrl);
+		requestBodyMap.put("action", "long2short");
+		String result = WeixinUtils.postObject(WeixinUtils.URL_SHORTURL, requestParameters, requestBodyMap);
+		logger.debug("----------- long 2 short url: " + result);
+		return JSONObject.parseObject(result, ShortUrlReturnBean.class);
+	}
+
 	public String processPlainText(InputStream inputStream, String timestamp, String nonce, String msgSignature) {
 		try {
 			String fromXml = IOUtils.toString(inputStream, "UTF-8");

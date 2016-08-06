@@ -72,6 +72,19 @@ public class WeixinUtils {
 
 	public static final String URL_SHORTURL = "https://api.weixin.qq.com/cgi-bin/shorturl";
 
+	public static final String URL_MENU_CREATE = "https://api.weixin.qq.com/cgi-bin/menu/create";
+
+
+	public static final String URL_KFACCOUNT_ADD = "https://api.weixin.qq.com/customservice/kfaccount/add";
+
+	public static final String URL_KFACCOUNT_UPDATE = "https://api.weixin.qq.com/customservice/kfaccount/update";
+
+	public static final String URL_KFACCOUNT_DELETE = "https://api.weixin.qq.com/customservice/kfaccount/del";
+
+	public static final String URL_KFACCOUNT_UPLOADHEADIMG = "http://api.weixin.qq.com/customservice/kfaccount/uploadheadimg";
+
+	public static final String URL_KFACCOUNT_LIST = "https://api.weixin.qq.com/cgi-bin/customservice/getkflist";
+
 	public static final String SCOPE_BASE = "snsapi_base";
 
 	public static final String SCOPE_USER_INFO = "snsapi_userinfo";
