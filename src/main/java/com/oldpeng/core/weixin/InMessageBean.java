@@ -27,6 +27,9 @@ public class InMessageBean implements Serializable {
 	@XStreamAlias("Content")
 	private String content;
 
+	@XStreamAlias("MsgID")
+	private String msgID;
+
 	@XStreamAlias("MsgId")
 	private String msgId;
 
@@ -97,12 +100,12 @@ public class InMessageBean implements Serializable {
 		this.content = content;
 	}
 
-	public String getMsgId() {
-		return msgId;
+	public String getMsgID() {
+		return msgID;
 	}
 
-	public void setMsgId(String msgId) {
-		this.msgId = msgId;
+	public void setMsgID(String msgID) {
+		this.msgID = msgID;
 	}
 
 	public String getEvent() {
@@ -175,5 +178,13 @@ public class InMessageBean implements Serializable {
 
 	public void setFormat(String format) {
 		this.format = format;
+	}
+
+	public String getMsgId() {
+		return msgId;
+	}
+
+	public void setMsgId(String msgId) {
+		this.msgId = msgId;
 	}
 }
