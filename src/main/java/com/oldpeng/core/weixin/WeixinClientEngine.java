@@ -121,6 +121,17 @@ public class WeixinClientEngine {
 		return JSONObject.parseObject(result, UserInfoBean.class);
 	}
 
+	//TODO 不确定
+	public UserInfoBean getUserInfoByUnionid(String accessToken, String unionid) {
+		Map<String, String> requestParameters = Maps.newHashMap();
+		requestParameters.put("access_token", accessToken);
+		requestParameters.put("unionid", unionid);
+		requestParameters.put("lang", "zh_CN");
+		String result = WeixinUtils.post(WeixinUtils.URL_USER_INFO, requestParameters, null);
+		logger.debug("------- web auth user info: " + result);
+		return JSONObject.parseObject(result, UserInfoBean.class);
+	}
+
 	public String sendTemplateMessage(String accessToken, TemplateMessage templateMessage){
 		Map<String, String> requestParameters = Maps.newHashMap();
 		requestParameters.put("access_token", accessToken);
