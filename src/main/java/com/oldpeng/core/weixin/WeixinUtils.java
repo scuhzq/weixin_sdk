@@ -6,9 +6,11 @@ import com.oldpeng.core.utils.HttpsRequest;
 import com.oldpeng.core.utils.XmlUtils;
 import com.squareup.okhttp.*;
 import org.apache.commons.lang.StringUtils;
+import org.apache.tika.Tika;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.File;
 import java.util.Map;
 
 /**
@@ -71,6 +73,10 @@ public class WeixinUtils {
 	public static final String URL_WEB_PAGE_USER_ACCESS_TOKEN = "https://api.weixin.qq.com/sns/oauth2/access_token";
 
 	public static final String URL_SHORTURL = "https://api.weixin.qq.com/cgi-bin/shorturl";
+
+	public static final String URL_MEDIA_UPLOAD = "https://api.weixin.qq.com/cgi-bin/media/upload";
+
+	public static final String URL_MEDIA_GET = "https://api.weixin.qq.com/cgi-bin/media/get";
 
 	public static final String URL_MENU_CREATE = "https://api.weixin.qq.com/cgi-bin/menu/create";
 
@@ -181,6 +187,36 @@ public class WeixinUtils {
 			logger.debug("<<<");
 
 			return new HttpsRequest(certLocalPath, certPassword).sendPost(baseUrl, contentXml);
+		} catch(Throwable t){
+			logger.error(t.getMessage(), t);
+			return null;
+		}
+	}
+
+	public static String uploadFile(String baseUrl, Map<String, String> requestParameters, String paramName, File file) {
+		try {
+			String httpUrl = buildUrl(baseUrl, requestParameters);
+
+			logger.debug(">>>");
+			logger.debug("okhttp url: " + httpUrl);
+			logger.debug("<<<");
+
+			RequestBody requestBody = new MultipartBuilder()
+					.type(MultipartBuilder.FORM)
+					.addFormDataPart(paramName, file.getName(),
+							RequestBody.create(MediaType.parse(new Tika().detect(file)), file)).build();
+
+			Request request = new Request.Builder()
+					.url(httpUrl)
+					.post(requestBody)
+					.build();
+
+			Response response = client.newCall(request).execute();
+			if (!response.isSuccessful()) {
+				return null;
+			}
+
+			return response.body().string();
 		} catch(Throwable t){
 			logger.error(t.getMessage(), t);
 			return null;

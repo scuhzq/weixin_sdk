@@ -8,7 +8,9 @@ import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.File;
 import java.io.InputStream;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -150,6 +152,86 @@ public class WeixinClientEngine {
 		return WeixinUtils.postObject(WeixinUtils.URL_SEND_KF_MESSAGE, requestParameters, requestBodyMap);
 	}
 
+	public String sendKefuImageMessage(String accessToken, String openId, String mediaId){
+		Map<String, String> requestParameters = Maps.newHashMap();
+		requestParameters.put("access_token", accessToken);
+		Map<String, Object> requestBodyMap = Maps.newHashMap();
+		requestBodyMap.put("touser", openId);
+		requestBodyMap.put("msgtype", "image");
+		Map<String, String> contentMap = Maps.newHashMap();
+		contentMap.put("media_id", mediaId);
+		requestBodyMap.put("image", contentMap);
+		return WeixinUtils.postObject(WeixinUtils.URL_SEND_KF_MESSAGE, requestParameters, requestBodyMap);
+	}
+
+	public String sendKefuVoiceMessage(String accessToken, String openId, String mediaId){
+		Map<String, String> requestParameters = Maps.newHashMap();
+		requestParameters.put("access_token", accessToken);
+		Map<String, Object> requestBodyMap = Maps.newHashMap();
+		requestBodyMap.put("touser", openId);
+		requestBodyMap.put("msgtype", "voice");
+		Map<String, String> contentMap = Maps.newHashMap();
+		contentMap.put("media_id", mediaId);
+		requestBodyMap.put("voice", contentMap);
+		return WeixinUtils.postObject(WeixinUtils.URL_SEND_KF_MESSAGE, requestParameters, requestBodyMap);
+	}
+
+	public String sendKefuMpNewsMessage(String accessToken, String openId, String mediaId){
+		Map<String, String> requestParameters = Maps.newHashMap();
+		requestParameters.put("access_token", accessToken);
+		Map<String, Object> requestBodyMap = Maps.newHashMap();
+		requestBodyMap.put("touser", openId);
+		requestBodyMap.put("msgtype", "mpnews");
+		Map<String, String> contentMap = Maps.newHashMap();
+		contentMap.put("media_id", mediaId);
+		requestBodyMap.put("mpnews", contentMap);
+		return WeixinUtils.postObject(WeixinUtils.URL_SEND_KF_MESSAGE, requestParameters, requestBodyMap);
+	}
+
+	public String sendKefuMpCardMessage(String accessToken, String openId, String cardId){
+		Map<String, String> requestParameters = Maps.newHashMap();
+		requestParameters.put("access_token", accessToken);
+		Map<String, Object> requestBodyMap = Maps.newHashMap();
+		requestBodyMap.put("touser", openId);
+		requestBodyMap.put("msgtype", "wxcard");
+		Map<String, String> contentMap = Maps.newHashMap();
+		contentMap.put("card_id", cardId);
+		requestBodyMap.put("wxcard", contentMap);
+		return WeixinUtils.postObject(WeixinUtils.URL_SEND_KF_MESSAGE, requestParameters, requestBodyMap);
+	}
+
+	public String sendKefuVideoMessage(String accessToken, String openId, VideoInfoBean videoInfoBean){
+		Map<String, String> requestParameters = Maps.newHashMap();
+		requestParameters.put("access_token", accessToken);
+		Map<String, Object> requestBodyMap = Maps.newHashMap();
+		requestBodyMap.put("touser", openId);
+		requestBodyMap.put("msgtype", "video");
+		requestBodyMap.put("video", videoInfoBean);
+		return WeixinUtils.postObject(WeixinUtils.URL_SEND_KF_MESSAGE, requestParameters, requestBodyMap);
+	}
+
+	public String sendKefuMusicMessage(String accessToken, String openId, MusicInfoBean musicInfoBean){
+		Map<String, String> requestParameters = Maps.newHashMap();
+		requestParameters.put("access_token", accessToken);
+		Map<String, Object> requestBodyMap = Maps.newHashMap();
+		requestBodyMap.put("touser", openId);
+		requestBodyMap.put("msgtype", "music");
+		requestBodyMap.put("music", musicInfoBean);
+		return WeixinUtils.postObject(WeixinUtils.URL_SEND_KF_MESSAGE, requestParameters, requestBodyMap);
+	}
+
+	public String sendKefuNewsMessage(String accessToken, String openId, List<ArticleInfoBean> articleInfoBeanList){
+		Map<String, String> requestParameters = Maps.newHashMap();
+		requestParameters.put("access_token", accessToken);
+		Map<String, Object> requestBodyMap = Maps.newHashMap();
+		requestBodyMap.put("touser", openId);
+		requestBodyMap.put("msgtype", "news");
+		Map<String, Object> newsMap = Maps.newHashMap();
+		newsMap.put("articles", articleInfoBeanList);
+		requestBodyMap.put("news", newsMap);
+		return WeixinUtils.postObject(WeixinUtils.URL_SEND_KF_MESSAGE, requestParameters, requestBodyMap);
+	}
+
 	public UserInfoListBean batchGetUserInfoList(String accessToken, OpenidListBatchGetBean openidListBatchGetBean){
 		Map<String, String> requestParameters = Maps.newHashMap();
 		requestParameters.put("access_token", accessToken);
@@ -186,6 +268,36 @@ public class WeixinClientEngine {
 		String result = WeixinUtils.postObject(WeixinUtils.URL_SHORTURL, requestParameters, requestBodyMap);
 		logger.debug("----------- long 2 short url: " + result);
 		return JSONObject.parseObject(result, ShortUrlReturnBean.class);
+	}
+
+	/**
+	 * 上传临时素材
+	 * @param accessToken
+	 * @param type
+	 * @param mediaFile
+	 * @return
+	 */
+	public MediaReturnBean uploadMedia(String accessToken, String type, File mediaFile){
+		Map<String, String> requestParameters = Maps.newHashMap();
+		requestParameters.put("access_token", accessToken);
+		requestParameters.put("type", type);
+
+		String result = WeixinUtils.uploadFile(WeixinUtils.URL_MEDIA_UPLOAD, requestParameters, "media", mediaFile);
+		logger.debug("----------- upload file: " + result);
+		return JSONObject.parseObject(result, MediaReturnBean.class);
+	}
+
+	/**
+	 * 获取临时素材的url
+	 * @param accessToken
+	 * @param mediaId
+	 * @return
+	 */
+	public String getMediaUrl(String accessToken, String mediaId){
+		Map<String, String> requestParameters = Maps.newHashMap();
+		requestParameters.put("access_token", accessToken);
+		requestParameters.put("media_id", mediaId);
+		return WeixinUtils.buildUrl(WeixinUtils.URL_MEDIA_GET, requestParameters);
 	}
 
 	public String processPlainText(InputStream inputStream, String timestamp, String nonce, String msgSignature) {
