@@ -105,7 +105,7 @@ public class MenuInfoBean implements Serializable {
 	}
 
 	/**
-	 * https://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1421141241&token=&lang=zh_CN
+	 * @see <a href="https://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1421141241&token=&lang=zh_CN">微信文档</a>
 	 */
 	public enum Type {
 
