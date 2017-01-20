@@ -300,6 +300,33 @@ public class WeixinClientEngine {
 		return WeixinUtils.buildUrl(WeixinUtils.URL_MEDIA_GET, requestParameters);
 	}
 
+	/**
+	 * 创建菜单
+	 * @param accessToken
+	 * @param menuInfoBean
+	 * @return
+	 */
+	public String createMenu(String accessToken, MenuInfoBean menuInfoBean){
+		Map<String, String> requestParameters = Maps.newHashMap();
+		requestParameters.put("access_token", accessToken);
+		String result = WeixinUtils.postObject(WeixinUtils.URL_MENU_CREATE, requestParameters, menuInfoBean);
+		logger.debug("----------- menu create: " + result);
+		return result;
+	}
+
+	/**
+	 * 获取菜单信息
+	 * @param accessToken
+	 * @return
+	 */
+	public MenuReturnInfoBean getMenu(String accessToken){
+		Map<String, String> requestParameters = Maps.newHashMap();
+		requestParameters.put("access_token", accessToken);
+		String result = WeixinUtils.getMethod(WeixinUtils.URL_MENU_GET, requestParameters);
+		logger.debug("----------- menu get: " + result);
+		return JSONObject.parseObject(result, MenuReturnInfoBean.class);
+	}
+
 	public String processPlainText(InputStream inputStream, String timestamp, String nonce, String msgSignature) {
 		try {
 			String fromXml = IOUtils.toString(inputStream, "UTF-8");

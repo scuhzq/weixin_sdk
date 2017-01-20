@@ -80,6 +80,7 @@ public class WeixinUtils {
 
 	public static final String URL_MENU_CREATE = "https://api.weixin.qq.com/cgi-bin/menu/create";
 
+	public static final String URL_MENU_GET = "https://api.weixin.qq.com/cgi-bin/menu/get";
 
 	public static final String URL_KFACCOUNT_ADD = "https://api.weixin.qq.com/customservice/kfaccount/add";
 
@@ -109,6 +110,31 @@ public class WeixinUtils {
 
 	public static String postObject(String url, Map<String, String> requestParameters, Object object){
 		return postMethod(url, requestParameters, JSONObject.toJSONString(object));
+	}
+
+	public static String getMethod(String baseUrl, Map<String, String> requestParameters){
+		try {
+			String httpUrl = buildUrl(baseUrl, requestParameters);
+
+			logger.debug(">>>");
+			logger.debug("okhttp url: " + httpUrl);
+			logger.debug("<<<");
+
+			Request request = new Request.Builder()
+					.url(httpUrl)
+					.get()
+					.build();
+
+			Response response = client.newCall(request).execute();
+			if (!response.isSuccessful()) {
+				return null;
+			}
+
+			return response.body().string();
+		} catch(Throwable t){
+			logger.error(t.getMessage(), t);
+			return null;
+		}
 	}
 
 	public static String postMethod(String baseUrl, Map<String, String> requestParameters, String requestBodyJson){

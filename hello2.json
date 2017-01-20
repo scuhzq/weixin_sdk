@@ -1,0 +1,24 @@
+{
+	"menu": {
+		"button": [
+			{
+				"name": "教室文档",
+				"sub_button": [],
+				"type": "view",
+				"url": "http://weixin.duobeiyun.com/help1"
+			},
+			{
+				"name": "微信案例",
+				"sub_button": [],
+				"type": "view",
+				"url": "http://weixin.duobeiyun.com/case"
+			},
+			{
+				"key": "support",
+				"name": "联系客服",
+				"sub_button": [],
+				"type": "click"
+			}
+		]
+	}
+}

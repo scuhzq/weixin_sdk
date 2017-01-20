@@ -1,0 +1,41 @@
+{
+	"menu": {
+		"button": [
+			{
+				"name": "教室文档",
+				"sub_button": [],
+				"type": "view",
+				"url": "http://weixin.duobeiyun.com/help1"
+			},
+			{
+				"name": "微信案例",
+				"sub_button": [],
+				"type": "view",
+				"url": "http://weixin.duobeiyun.com/case"
+			},
+			{
+				"name": "联系客服",
+				"sub_button": [
+					{
+						"key": "zicaidan1",
+						"name": "账户问题",
+						"sub_button": [],
+						"type": "click"
+					},
+					{
+						"key": "zicaidan2",
+						"name": "进教室问题",
+						"sub_button": [],
+						"type": "click"
+					},
+					{
+						"key": "zicaidan3",
+						"name": "充值问题",
+						"sub_button": [],
+						"type": "click"
+					}
+				]
+			}
+		]
+	}
+}
